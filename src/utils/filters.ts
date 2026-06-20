@@ -1,5 +1,7 @@
 export function getThemeFilter(theme: string): string {
   switch (theme) {
+    case "NORMAL":
+      return "";
     case "VINTAGE":
       return "sepia contrast-125 brightness-90";
     case "ALL BLACK":
@@ -19,6 +21,8 @@ export function getThemeFilter(theme: string): string {
 
 export function getCanvasFilter(theme: string): string {
   switch (theme) {
+    case "NORMAL":
+      return "none";
     case "VINTAGE":
       return "sepia(0.6) contrast(1.25) brightness(0.9)";
     case "ALL BLACK":

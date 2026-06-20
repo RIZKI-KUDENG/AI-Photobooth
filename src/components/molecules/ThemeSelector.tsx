@@ -1,6 +1,7 @@
 import ThemeButton from "../atoms/ThemeButton";
 
 const THEMES = [
+  "NORMAL",
   "ALL BLACK",
   "OLD MONEY",
   "K-POP",

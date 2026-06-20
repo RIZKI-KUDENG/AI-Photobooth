@@ -36,13 +36,15 @@ export default function CameraCard({
       <div className="relative overflow-hidden border-4 border-black bg-black aspect-3/4">
         {countdown !== null && <CountdownOverlay countdown={countdown} />}
 
-        <Webcam
-          ref={webcamRef}
-          audio={false}
-          screenshotFormat="image/jpeg"
-          videoConstraints={{ width: { ideal: 1920 }, height: { ideal: 1080 }, facingMode: "user" }}
-          className={`w-full h-full object-cover ${getThemeFilter(selectedTheme)}`}
-        />
+        <div className="w-full h-full [&_video]:scale-x-[-1]">
+          <Webcam
+            ref={webcamRef}
+            audio={false}
+            screenshotFormat="image/jpeg"
+            videoConstraints={{ width: { ideal: 1920 }, height: { ideal: 1080 }, facingMode: "user" }}
+            className={`w-full h-full object-cover ${getThemeFilter(selectedTheme)}`}
+          />
+        </div>
       </div>
 
       <SnapButton
