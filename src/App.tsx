@@ -1,7 +1,15 @@
 import Webcam from "react-webcam";
 import Header from "./components/fragments/Header";
+import { useRef, useState } from "react";
 
 export default function App() {
+  const webcamRef = useRef(null);
+  const [photos, setPhotos] = useState([]);
+
+  const capture = () => {
+    const imageSrc = webcamRef.current.getScreenshot();
+    setPhotos((prev: string[]) => [...prev, imageSrc]);
+  };
   return (
     <div className="min-h-screen bg-[#F8F1E7] p-8">
       <div className="mx-auto max-w-7xl">
@@ -35,7 +43,7 @@ export default function App() {
               </div>
             </div>
 
-            <div className="border-4 border-black bg-pink-300 p-6 shadow-[8px_8px_0px_0px_#000]">
+            <div className="border-4 border-black bg-slate-300 p-6 shadow-[8px_8px_0px_0px_#000]">
               <h2 className="mb-4 text-3xl font-black uppercase">
                 Choose Layout
               </h2>
@@ -48,6 +56,19 @@ export default function App() {
                   >
                     {layout}
                   </button>
+                ))}
+              </div>
+            </div>
+            <div className="mt-5 border-4 border-black bg-pink-300 p-6 shadow-[8px_8px_0px_0px_#000]">
+              <h2 className="text-3xl font-black uppercase">Photos</h2>
+              <div className="grid grid-cols-2 gap-4">
+                {photos.map((photo, index) => (
+                  <img
+                    key={index}
+                    src={photo}
+                    alt={`Photo ${index + 1}`}
+                    className="w-full"
+                  />
                 ))}
               </div>
             </div>
@@ -65,13 +86,17 @@ export default function App() {
 
             <div className="overflow-hidden border-4 border-black">
               <Webcam
+                ref={webcamRef}
                 audio={false}
                 screenshotFormat="image/jpeg"
-                className="aspect-[3/4] w-full object-cover"
+                className="aspect-3/4 w-full object-cover"
               />
             </div>
 
-            <button className="mt-5 w-full border-4 border-black bg-lime-300 py-4 text-xl font-black uppercase transition hover:translate-x-1 hover:translate-y-1 hover:shadow-none shadow-[6px_6px_0px_0px_#000]">
+            <button
+              className="mt-5 w-full border-4 border-black bg-lime-300 py-4 text-xl font-black uppercase transition hover:translate-x-1 hover:translate-y-1 hover:shadow-none shadow-[6px_6px_0px_0px_#000]"
+              onClick={capture}
+            >
               Start Session
             </button>
           </div>
