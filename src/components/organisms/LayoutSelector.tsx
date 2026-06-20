@@ -82,6 +82,125 @@ const LAYOUTS: LayoutTemplate[] = [
   },
 ];
 
+function LayoutPreview({ layout }: { layout: LayoutTemplate }) {
+  switch (layout.id) {
+    case "layout-b":
+      return (
+        <div className="grid grid-cols-2 gap-0.5 bg-gray-100 p-0.5 border border-gray-300 aspect-[3/4] w-full">
+          {layout.previewImages.map((img, index) => (
+            <div key={index} className="aspect-[3/4] w-full overflow-hidden bg-gray-200">
+              <img src={img} alt="Preview" className="h-full w-full object-cover" />
+            </div>
+          ))}
+        </div>
+      );
+    case "hearts-filter":
+      return (
+        <div className="flex flex-col gap-0.5 bg-[#FFF0F2] p-0.5 border border-[#FF8DA1] aspect-[3/4] w-full">
+          {layout.previewImages.map((img, index) => (
+            <div key={index} className="aspect-[4/3] w-full overflow-hidden bg-[#FFF0F2]">
+              <img src={img} alt="Preview" className="h-full w-full object-cover" />
+            </div>
+          ))}
+        </div>
+      );
+    case "dog-filter":
+      return (
+        <div className="grid grid-cols-4 gap-0.5 bg-[#FFF9EB] p-0.5 border border-[#E6A04D] w-full aspect-[4/3] items-center justify-center">
+          {layout.previewImages.map((img, index) => (
+            <div key={index} className="aspect-[3/4] w-full overflow-hidden bg-[#FFF9EB]">
+              <img src={img} alt="Preview" className="h-full w-full object-cover" />
+            </div>
+          ))}
+        </div>
+      );
+    case "vintage-layout":
+      return (
+        <div className="relative h-[95px] w-full overflow-hidden bg-gray-50 border border-gray-300 flex items-center justify-center">
+          {layout.previewImages.map((img, index) => (
+            <div
+              key={index}
+              className="absolute border border-black bg-white p-0.5 shadow-[1px_1px_0px_0px_#000] w-9 transition-all duration-300"
+              style={{
+                transform: `rotate(${(index - 1.5) * 8}deg) translateY(${Math.abs(index - 1.5) * 4}px)`,
+                zIndex: index,
+                left: `calc(50% - 18px + ${(index - 1.5) * 7}px)`,
+              }}
+            >
+              <div className="overflow-hidden aspect-[3/4] bg-gray-100">
+                <img src={img} alt="Preview" className="h-full w-full object-cover" />
+              </div>
+            </div>
+          ))}
+        </div>
+      );
+    case "solace-layout":
+      return (
+        <div className="grid grid-cols-3 gap-0.5 bg-gray-100 p-0.5 border border-gray-300 aspect-[3/4] w-full">
+          <div className="col-span-2 aspect-[3/4] overflow-hidden bg-gray-200">
+            <img src={layout.previewImages[0]} alt="Preview" className="h-full w-full object-cover" />
+          </div>
+          <div className="col-span-1 flex flex-col gap-0.5 justify-between">
+            {layout.previewImages.slice(1).map((img, index) => (
+              <div key={index} className="aspect-[3/4] w-full overflow-hidden bg-gray-200 min-h-0">
+                <img src={img} alt="Preview" className="h-full w-full object-cover" />
+              </div>
+            ))}
+          </div>
+        </div>
+      );
+    default:
+      return null;
+  }
+}
+
+function LayoutCardInner({ layout, isSelected, compact }: { layout: LayoutTemplate; isSelected: boolean; compact?: boolean }) {
+  const w = compact ? "w-[120px]" : "w-[140px]";
+  return (
+    <>
+      <div
+        className={`relative ${w} bg-white p-2 transition-all duration-200 border-4 ${
+          isSelected
+            ? "border-[#FF8DA1] bg-[#FFF0F2] scale-105 shadow-[4px_4px_0px_0px_#000]"
+            : "border-black hover:-translate-y-1 shadow-[4px_4px_0px_0px_#000]"
+        }`}
+      >
+        {layout.badge && (
+          <span className="absolute -top-3 left-1/2 z-20 -translate-x-1/2 whitespace-nowrap bg-black text-white border-2 border-white px-2 py-0.5 text-[8px] font-black uppercase">
+            {layout.badge}
+          </span>
+        )}
+
+        <LayoutPreview layout={layout} />
+
+        <div className="mt-1 text-center text-[7px] tracking-widest text-gray-400 uppercase font-bold">
+          photobooth
+        </div>
+      </div>
+
+      <div className="mt-3 text-center">
+        <h3 className={`text-xs font-black uppercase text-[#2D2D2D] truncate ${w}`}>
+          {layout.name}
+        </h3>
+        <p className="text-[10px] text-gray-500 font-bold">
+          {layout.size}
+        </p>
+      </div>
+    </>
+  );
+}
+
+function LayoutCard({ layout, isSelected, onSelect }: { layout: LayoutTemplate; isSelected: boolean; onSelect: (id: string) => void }) {
+  return (
+    <div
+      onClick={() => onSelect(layout.id)}
+      className="flex flex-col items-center cursor-pointer"
+    >
+      <LayoutCardInner layout={layout} isSelected={isSelected} compact />
+    </div>
+  );
+}
+
 export default function LayoutSelector({
   selectedLayout,
   onSelectLayout,
@@ -99,17 +218,30 @@ export default function LayoutSelector({
   };
 
   return (
-    <div className="border-4 border-black bg-white p-6 shadow-[8px_8px_0px_0px_#000] relative">
-      <div className="mb-6 text-center">
-        <h2 className="text-3xl font-black uppercase tracking-tight text-[#2D2D2D]">
+    <div className="border-4 border-black bg-white p-4 md:p-6 shadow-[8px_8px_0px_0px_#000] relative">
+      <div className="mb-4 md:mb-6 text-center">
+        <h2 className="text-2xl md:text-3xl font-black uppercase tracking-tight text-[#2D2D2D]">
           choose your layout
         </h2>
-        <p className="text-xs italic text-gray-500 mt-1">
+        <p className="text-[10px] md:text-xs italic text-gray-500 mt-1">
           Select from our collection of photo booth layouts
         </p>
       </div>
 
-      <div className="relative px-10">
+      {/* Mobile: grid wrap, no overflow */}
+      <div className="flex flex-wrap justify-center gap-4 md:hidden">
+        {LAYOUTS.map((layout) => (
+          <LayoutCard
+            key={layout.id}
+            layout={layout}
+            isSelected={selectedLayout === layout.id}
+            onSelect={onSelectLayout}
+          />
+        ))}
+      </div>
+
+      {/* Desktop: horizontal scroll with arrows */}
+      <div className="hidden md:block relative px-10">
         <button
           onClick={() => handleScroll("left")}
           className="absolute left-0 top-1/2 z-10 flex h-10 w-10 -translate-y-1/2 items-center justify-center rounded-full border-4 border-black bg-white font-black shadow-[2px_2px_0px_0px_#000] transition active:translate-x-0.5 active:translate-y-0.5 active:shadow-none"
@@ -127,93 +259,10 @@ export default function LayoutSelector({
               onClick={() => onSelectLayout(layout.id)}
               className="group flex flex-col items-center shrink-0 snap-center cursor-pointer"
             >
-              <div
-                className={`relative w-[140px] bg-white p-2 transition-all duration-200 border-4 ${
-                  selectedLayout === layout.id
-                    ? "border-[#FF8DA1] bg-[#FFF0F2] scale-105 shadow-[4px_4px_0px_0px_#000]"
-                    : "border-black hover:-translate-y-1 shadow-[4px_4px_0px_0px_#000]"
-                }`}
-              >
-                {layout.badge && (
-                  <span className="absolute -top-3 left-1/2 z-20 -translate-x-1/2 whitespace-nowrap bg-black text-white border-2 border-white px-2 py-0.5 text-[8px] font-black uppercase">
-                    {layout.badge}
-                  </span>
-                )}
-
-                {/* Mini Layout Renderer */}
-                {layout.id === "layout-b" && (
-                  <div className="grid grid-cols-2 gap-0.5 bg-gray-100 p-0.5 border border-gray-300 aspect-[3/4] w-full">
-                    {layout.previewImages.map((img, index) => (
-                      <div key={index} className="aspect-[3/4] w-full overflow-hidden bg-gray-200">
-                        <img src={img} alt="Preview" className="h-full w-full object-cover" />
-                      </div>
-                    ))}
-                  </div>
-                )}
-                {layout.id === "hearts-filter" && (
-                  <div className="flex flex-col gap-0.5 bg-[#FFF0F2] p-0.5 border border-[#FF8DA1] aspect-[3/4] w-full">
-                    {layout.previewImages.map((img, index) => (
-                      <div key={index} className="aspect-[4/3] w-full overflow-hidden bg-[#FFF0F2]">
-                        <img src={img} alt="Preview" className="h-full w-full object-cover" />
-                      </div>
-                    ))}
-                  </div>
-                )}
-                {layout.id === "dog-filter" && (
-                  <div className="grid grid-cols-4 gap-0.5 bg-[#FFF9EB] p-0.5 border border-[#E6A04D] w-full aspect-[4/3] items-center justify-center">
-                    {layout.previewImages.map((img, index) => (
-                      <div key={index} className="aspect-[3/4] w-full overflow-hidden bg-[#FFF9EB]">
-                        <img src={img} alt="Preview" className="h-full w-full object-cover" />
-                      </div>
-                    ))}
-                  </div>
-                )}
-                {layout.id === "vintage-layout" && (
-                  <div className="relative h-[95px] w-full overflow-hidden bg-gray-50 border border-gray-300 flex items-center justify-center">
-                    {layout.previewImages.map((img, index) => (
-                      <div
-                        key={index}
-                        className="absolute border border-black bg-white p-0.5 shadow-[1px_1px_0px_0px_#000] w-9 transition-all duration-300"
-                        style={{
-                          transform: `rotate(${(index - 1.5) * 8}deg) translateY(${Math.abs(index - 1.5) * 4}px)`,
-                          zIndex: index,
-                          left: `calc(50% - 18px + ${(index - 1.5) * 7}px)`,
-                        }}
-                      >
-                        <div className="overflow-hidden aspect-[3/4] bg-gray-100">
-                          <img src={img} alt="Preview" className="h-full w-full object-cover" />
-                        </div>
-                      </div>
-                    ))}
-                  </div>
-                )}
-                {layout.id === "solace-layout" && (
-                  <div className="grid grid-cols-3 gap-0.5 bg-gray-100 p-0.5 border border-gray-300 aspect-[3/4] w-full">
-                    <div className="col-span-2 aspect-[3/4] overflow-hidden bg-gray-200">
-                      <img src={layout.previewImages[0]} alt="Preview" className="h-full w-full object-cover" />
-                    </div>
-                    <div className="col-span-1 flex flex-col gap-0.5 justify-between">
-                      {layout.previewImages.slice(1).map((img, index) => (
-                        <div key={index} className="aspect-[3/4] w-full overflow-hidden bg-gray-200 min-h-0">
-                          <img src={img} alt="Preview" className="h-full w-full object-cover" />
-                        </div>
-                      ))}
-                    </div>
-                  </div>
-                )}
-                <div className="mt-1 text-center text-[7px] tracking-widest text-gray-400 uppercase font-bold">
-                  photobooth
-                </div>
-              </div>
-
-              <div className="mt-3 text-center">
-                <h3 className="text-xs font-black uppercase text-[#2D2D2D] truncate w-[140px]">
-                  {layout.name}
-                </h3>
-                <p className="text-[10px] text-gray-500 font-bold">
-                  {layout.size}
-                </p>
-              </div>
+              <LayoutCardInner
+                layout={layout}
+                isSelected={selectedLayout === layout.id}
+              />
             </div>
           ))}
         </div>

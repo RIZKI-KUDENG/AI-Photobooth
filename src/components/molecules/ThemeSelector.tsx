@@ -20,14 +20,14 @@ export default function ThemeSelector({
   onSelectTheme,
 }: ThemeSelectorProps) {
   return (
-    <div className="border-4 border-black bg-cyan-300 p-6 shadow-[8px_8px_0px_0px_#000]">
-      <div className="mb-4 flex items-center justify-between">
-        <h2 className="text-3xl font-black uppercase">Choose Filter</h2>
-        <span className="border-2 border-black bg-white px-2 py-1 text-xs font-black uppercase">
+    <div className="border-4 border-black bg-cyan-300 p-4 md:p-6 shadow-[8px_8px_0px_0px_#000]">
+      <div className="mb-3 md:mb-4 flex items-center justify-between">
+        <h2 className="text-2xl md:text-3xl font-black uppercase">Choose Filter</h2>
+        <span className="border-2 border-black bg-white px-2 py-1 text-[10px] md:text-xs font-black uppercase">
           Active: {selectedTheme}
         </span>
       </div>
-      <div className="grid gap-4 sm:grid-cols-2">
+      <div className="grid gap-3 md:gap-4 grid-cols-2">
         {THEMES.map((theme) => (
           <ThemeButton
             key={theme}

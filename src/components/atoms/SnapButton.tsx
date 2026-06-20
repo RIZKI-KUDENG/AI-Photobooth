@@ -20,7 +20,7 @@ export default function SnapButton({
   return (
     <button
       disabled={disabled}
-      className={`mt-5 w-full border-4 border-black py-4 text-xl font-black uppercase transition shadow-[6px_6px_0px_0px_#000] ${
+      className={`mt-4 md:mt-5 w-full border-4 border-black py-3 md:py-4 text-lg md:text-xl font-black uppercase transition shadow-[6px_6px_0px_0px_#000] ${
         disabled
           ? "bg-gray-300 text-gray-500 cursor-not-allowed shadow-none translate-x-1 translate-y-1"
           : "bg-lime-300 hover:translate-x-1 hover:translate-y-1 hover:shadow-none"

@@ -27,7 +27,7 @@ export default function CameraCard({
   getThemeFilter,
 }: CameraCardProps) {
   return (
-    <div className="border-4 border-black bg-white p-5 shadow-[10px_10px_0px_0px_#000] h-fit sticky top-8">
+    <div className="border-4 border-black bg-white p-4 md:p-5 shadow-[10px_10px_0px_0px_#000] h-fit md:sticky md:top-8">
       <div className="mb-4 flex items-center justify-between">
         <LiveIndicator />
         <LayoutBadge selectedLayout={selectedLayout} />
