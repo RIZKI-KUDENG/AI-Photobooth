@@ -1,18 +1,20 @@
 import Webcam from "react-webcam";
 import Header from "./components/fragments/Header";
+import LayoutSelector from "./components/fragments/LayoutSelector";
+
 import { useRef, useState, useEffect } from "react";
 
 export default function App() {
   const webcamRef = useRef<any>(null);
   const [photos, setPhotos] = useState<string[]>([]);
   const [selectedTheme, setSelectedTheme] = useState<string>("ALL BLACK");
-  const [selectedLayout, setSelectedLayout] = useState<string>("4 STRIP");
+  const [selectedLayout, setSelectedLayout] = useState<string>("dog-filter");
 
   // State untuk kontrol countdown
   const [countdown, setCountdown] = useState<number | null>(null);
   const [isCapturing, setIsCapturing] = useState<boolean>(false);
 
-  // Mapping tema ke CSS Filter Tailwind agar tombol tema langsung berfungsi!
+  // Mapping tema
   const getThemeFilter = (theme: string) => {
     switch (theme) {
       case "VINTAGE":
@@ -37,7 +39,7 @@ export default function App() {
     if (layout === "2 SHOTS") return 2;
     if (layout === "4 STRIP") return 4;
     if (layout === "6 GRID") return 6;
-    return 12; // Untuk FREE layout
+    return 12;
   };
 
   const maxPhotos = getLayoutLimit(selectedLayout);
@@ -47,7 +49,6 @@ export default function App() {
     if (countdown === null) return;
 
     if (countdown === 0) {
-      // Saat countdown habis, ambil foto
       executeSnap();
       setCountdown(null);
       setIsCapturing(false);
@@ -61,7 +62,6 @@ export default function App() {
     return () => clearTimeout(timer);
   }, [countdown]);
 
-  // Fungsi untuk memicu jalannya countdown
   const startCountdown = () => {
     if (photos.length >= maxPhotos) {
       alert(
@@ -70,10 +70,10 @@ export default function App() {
       return;
     }
     setIsCapturing(true);
-    setCountdown(3); // Hitung mundur dari 3 detik
+    setCountdown(3);
   };
 
-  // Fungsi eksekusi jepret kamera
+  // Fungsi eksekusi
   const executeSnap = () => {
     if (webcamRef.current) {
       const imageSrc = webcamRef.current.getScreenshot();
@@ -83,7 +83,7 @@ export default function App() {
     }
   };
 
-  // Fungsi untuk membersihkan semua foto (Mulai sesi baru)
+  // Fungsi reset session
   const resetPhotobooth = () => {
     setPhotos([]);
   };
@@ -129,30 +129,10 @@ export default function App() {
             </div>
 
             {/* Layout Selector */}
-            <div className="border-4 border-black bg-slate-300 p-6 shadow-[8px_8px_0px_0px_#000]">
-              <h2 className="mb-4 text-3xl font-black uppercase">
-                Choose Layout
-              </h2>
-              <div className="flex flex-wrap gap-4">
-                {["2 SHOTS", "4 STRIP", "6 GRID", "FREE"].map((layout) => (
-                  <button
-                    key={layout}
-                    onClick={() => {
-                      setSelectedLayout(layout);
-                      // Jika ganti layout dan foto overlimit, reset otomatis demi keamanan data
-                      if (photos.length > getLayoutLimit(layout)) setPhotos([]);
-                    }}
-                    className={`border-4 border-black px-6 py-4 font-black transition hover:shadow-[4px_4px_0px_0px_#000] ${
-                      selectedLayout === layout
-                        ? "bg-yellow-300 shadow-[4px_4px_0px_0px_#000]"
-                        : "bg-white"
-                    }`}
-                  >
-                    {layout}
-                  </button>
-                ))}
-              </div>
-            </div>
+            <LayoutSelector
+              selectedLayout={selectedLayout}
+              onSelectLayout={setSelectedLayout}
+            />
 
             {/* Photos Display */}
             <div className="mt-5 border-4 border-black bg-pink-300 p-6 shadow-[8px_8px_0px_0px_#000]">
