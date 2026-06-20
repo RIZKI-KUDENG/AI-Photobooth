@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 1200" preserveAspectRatio="xMidYMid meet">
+  <rect width="900" height="1200" fill="none"/>
+  <g pointer-events="none" opacity="0.95" fill="#FFD166">
+    <circle cx="450" cy="120" r="48"/>
+  </g>
+  <g pointer-events="none" stroke="#FFD166" stroke-width="8" fill="none">
+    <!-- rays -->
+    <path d="M450 120 L450 0" />
+    <path d="M450 120 L520 10" />
+    <path d="M450 120 L380 10" />
+    <path d="M450 120 L600 40" opacity="0.8"/>
+    <path d="M450 120 L300 40" opacity="0.8"/>
+  </g>
+  <g pointer-events="none" fill="#FFF1D0" opacity="0.6">
+    <rect x="0" y="980" width="900" height="220"/>
+  </g>
+  <g pointer-events="none" fill="none" stroke="#000" stroke-width="6">
+    <rect x="24" y="24" width="852" height="1152" rx="12" />
+  </g>
+</svg>

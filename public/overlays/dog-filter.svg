@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 1200" preserveAspectRatio="xMidYMid meet">
+  <rect width="900" height="1200" fill="none"/>
+  <g pointer-events="none" fill="none" stroke="none">
+    <!-- left ear -->
+    <path d="M220 150 C160 20 60 60 140 240 C160 300 220 280 220 240 Z" fill="#8B5E3C" opacity="0.95"/>
+    <!-- right ear -->
+    <path d="M680 150 C740 20 840 60 760 240 C740 300 680 280 680 240 Z" fill="#8B5E3C" opacity="0.95"/>
+    <!-- nose -->
+    <ellipse cx="450" cy="720" rx="50" ry="36" fill="#111111" />
+    <!-- tongue -->
+    <path d="M430 760 C440 820 460 820 470 760 C470 760 450 770 450 790 C450 770 430 760 430 760 Z" fill="#FF6B91" />
+    <!-- whiskers -->
+    <path d="M490 720 h200" stroke="#000" stroke-width="6" stroke-linecap="round"/>
+    <path d="M410 720 h-200" stroke="#000" stroke-width="6" stroke-linecap="round"/>
+  </g>
+</svg>

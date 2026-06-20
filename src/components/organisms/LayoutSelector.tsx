@@ -14,79 +14,79 @@ interface LayoutSelectorProps {
   onSelectLayout: (id: string) => void;
 }
 
-function LayoutSelector({
+const LAYOUTS: LayoutTemplate[] = [
+  {
+    id: "layout-b",
+    name: "Layout B",
+    badge: "TRY IT NOW",
+    size: "Size 6 x 2 Strip",
+    poses: 4,
+    previewImages: [
+      "https://picsum.photos/id/237/150/200",
+      "https://picsum.photos/id/1025/150/200",
+      "https://picsum.photos/id/1062/150/200",
+      "https://picsum.photos/id/240/150/200",
+    ],
+  },
+  {
+    id: "hearts-filter",
+    name: "Hearts Filter Layout",
+    badge: "NEW LAYOUT",
+    size: "Size 6 x 2 Strip",
+    poses: 4,
+    previewImages: [
+      "https://picsum.photos/id/64/150/200",
+      "https://picsum.photos/id/65/150/200",
+      "https://picsum.photos/id/66/150/200",
+      "https://picsum.photos/id/67/150/200",
+    ],
+  },
+  {
+    id: "dog-filter",
+    name: "Dog Filter Layout",
+    badge: "NEW LAYOUT",
+    size: "Size 6 x 2 Strip",
+    poses: 4,
+    previewImages: [
+      "https://picsum.photos/id/1025/150/200",
+      "https://picsum.photos/id/1025/150/200",
+      "https://picsum.photos/id/1025/150/200",
+      "https://picsum.photos/id/1025/150/200",
+    ],
+  },
+  {
+    id: "vintage-layout",
+    name: "Vintage Layout",
+    badge: "NEW LAYOUT",
+    size: "Size 6 x 2 Strip",
+    poses: 4,
+    previewImages: [
+      "https://picsum.photos/id/338/150/200",
+      "https://picsum.photos/id/349/150/200",
+      "https://picsum.photos/id/365/150/200",
+      "https://picsum.photos/id/395/150/200",
+    ],
+  },
+  {
+    id: "solace-layout",
+    name: "solace Layout",
+    badge: "NEW LAYOUT",
+    size: "Size 6 x 2 Strip",
+    poses: 4,
+    previewImages: [
+      "https://picsum.photos/id/445/150/200",
+      "https://picsum.photos/id/446/150/200",
+      "https://picsum.photos/id/447/150/200",
+      "https://picsum.photos/id/448/150/200",
+    ],
+  },
+];
+
+export default function LayoutSelector({
   selectedLayout,
   onSelectLayout,
 }: LayoutSelectorProps) {
   const scrollContainerRef = useRef<HTMLDivElement>(null);
-
-  const layouts: LayoutTemplate[] = [
-    {
-      id: "layout-b",
-      name: "Layout B",
-      badge: "TRY IT NOW",
-      size: "Size 6 x 2 Strip",
-      poses: 4,
-      previewImages: [
-        "https://picsum.photos/id/237/150/200",
-        "https://picsum.photos/id/1025/150/200",
-        "https://picsum.photos/id/1062/150/200",
-        "https://picsum.photos/id/240/150/200",
-      ],
-    },
-    {
-      id: "hearts-filter",
-      name: "Hearts Filter Layout",
-      badge: "NEW LAYOUT",
-      size: "Size 6 x 2 Strip",
-      poses: 4,
-      previewImages: [
-        "https://picsum.photos/id/64/150/200",
-        "https://picsum.photos/id/65/150/200",
-        "https://picsum.photos/id/66/150/200",
-        "https://picsum.photos/id/67/150/200",
-      ],
-    },
-    {
-      id: "dog-filter",
-      name: "Dog Filter Layout",
-      badge: "NEW LAYOUT",
-      size: "Size 6 x 2 Strip",
-      poses: 4,
-      previewImages: [
-        "https://picsum.photos/id/1025/150/200",
-        "https://picsum.photos/id/1025/150/200",
-        "https://picsum.photos/id/1025/150/200",
-        "https://picsum.photos/id/1025/150/200",
-      ],
-    },
-    {
-      id: "vintage-layout",
-      name: "Vintage Layout",
-      badge: "NEW LAYOUT",
-      size: "Size 6 x 2 Strip",
-      poses: 4,
-      previewImages: [
-        "https://picsum.photos/id/338/150/200",
-        "https://picsum.photos/id/349/150/200",
-        "https://picsum.photos/id/365/150/200",
-        "https://picsum.photos/id/395/150/200",
-      ],
-    },
-    {
-      id: "solace-layout",
-      name: "solace Layout",
-      badge: "NEW LAYOUT",
-      size: "Size 6 x 2 Strip",
-      poses: 4,
-      previewImages: [
-        "https://picsum.photos/id/445/150/200",
-        "https://picsum.photos/id/446/150/200",
-        "https://picsum.photos/id/447/150/200",
-        "https://picsum.photos/id/448/150/200",
-      ],
-    },
-  ];
 
   const handleScroll = (direction: "left" | "right") => {
     if (scrollContainerRef.current) {
@@ -110,7 +110,6 @@ function LayoutSelector({
       </div>
 
       <div className="relative px-10">
-        {/* Tombol Kiri */}
         <button
           onClick={() => handleScroll("left")}
           className="absolute left-0 top-1/2 z-10 flex h-10 w-10 -translate-y-1/2 items-center justify-center rounded-full border-4 border-black bg-white font-black shadow-[2px_2px_0px_0px_#000] transition active:translate-x-0.5 active:translate-y-0.5 active:shadow-none"
@@ -118,12 +117,11 @@ function LayoutSelector({
           &larr;
         </button>
 
-        {/* List Slider Item */}
         <div
           ref={scrollContainerRef}
           className="scrollbar-none flex gap-6 overflow-x-auto pb-4 pt-4 snap-x snap-mandatory"
         >
-          {layouts.map((layout) => (
+          {LAYOUTS.map((layout) => (
             <div
               key={layout.id}
               onClick={() => onSelectLayout(layout.id)}
@@ -173,7 +171,6 @@ function LayoutSelector({
           ))}
         </div>
 
-        {/* Tombol Kanan */}
         <button
           onClick={() => handleScroll("right")}
           className="absolute right-0 top-1/2 z-10 flex h-10 w-10 -translate-y-1/2 items-center justify-center rounded-full border-4 border-black bg-white font-black shadow-[2px_2px_0px_0px_#000] transition active:translate-x-0.5 active:translate-y-0.5 active:shadow-none"
@@ -184,5 +181,3 @@ function LayoutSelector({
     </div>
   );
 }
-
-export default LayoutSelector;

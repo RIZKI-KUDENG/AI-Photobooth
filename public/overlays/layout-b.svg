@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 1200" preserveAspectRatio="xMidYMid meet">
+  <rect width="900" height="1200" fill="none"/>
+  <g pointer-events="none" fill="none" stroke="#000" stroke-width="14">
+    <rect x="18" y="18" width="864" height="1164" rx="18" ry="18" />
+  </g>
+  <g pointer-events="none" fill="#000" opacity="0.9">
+    <!-- sprocket holes left -->
+    <rect x="8" y="100" width="24" height="48" rx="6"/>
+    <rect x="8" y="220" width="24" height="48" rx="6"/>
+    <rect x="8" y="340" width="24" height="48" rx="6"/>
+    <rect x="8" y="460" width="24" height="48" rx="6"/>
+    <rect x="8" y="580" width="24" height="48" rx="6"/>
+    <rect x="8" y="700" width="24" height="48" rx="6"/>
+    <rect x="8" y="820" width="24" height="48" rx="6"/>
+    <rect x="8" y="940" width="24" height="48" rx="6"/>
+    <!-- sprocket holes right -->
+    <rect x="868" y="100" width="24" height="48" rx="6"/>
+    <rect x="868" y="220" width="24" height="48" rx="6"/>
+    <rect x="868" y="340" width="24" height="48" rx="6"/>
+    <rect x="868" y="460" width="24" height="48" rx="6"/>
+    <rect x="868" y="580" width="24" height="48" rx="6"/>
+    <rect x="868" y="700" width="24" height="48" rx="6"/>
+    <rect x="868" y="820" width="24" height="48" rx="6"/>
+    <rect x="868" y="940" width="24" height="48" rx="6"/>
+  </g>
+  <g pointer-events="none" fill="none" stroke="#000" stroke-width="8">
+    <!-- inner frames vertical divider -->
+    <line x1="450" y1="40" x2="450" y2="1160" stroke-opacity="0.8"/>
+  </g>
+</svg>
