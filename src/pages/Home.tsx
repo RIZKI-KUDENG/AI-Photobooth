@@ -11,18 +11,18 @@ export default function Home() {
   const webcamRef = useRef<Webcam | null>(null);
   const [photos, setPhotos] = useState<string[]>([]);
   const [selectedTheme, setSelectedTheme] = useState<string>("ALL BLACK");
-  const [selectedLayout, setSelectedLayout] = useState<string>("dog-filter");
+  const [selectedLayout, setSelectedLayout] = useState<string>("layout-b");
   const [countdown, setCountdown] = useState<number | null>(null);
   const [isCapturing, setIsCapturing] = useState<boolean>(false);
 
   const maxPhotos = getLayoutLimit(selectedLayout);
 
   const handleSnap = useCallback(async () => {
-    const dataUrl = await capturePhoto(webcamRef, selectedTheme, selectedLayout, getCanvasFilter);
+    const dataUrl = await capturePhoto(webcamRef, selectedTheme, getCanvasFilter);
     if (dataUrl) {
       setPhotos((prev) => [...prev, dataUrl]);
     }
-  }, [selectedTheme, selectedLayout]);
+  }, [selectedTheme]);
 
   useEffect(() => {
     if (countdown === null || countdown <= 0) return;

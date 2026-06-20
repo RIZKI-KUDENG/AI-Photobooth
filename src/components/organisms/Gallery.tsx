@@ -1,6 +1,7 @@
 import { useMemo } from "react";
 import ResetButton from "../atoms/ResetButton";
 import LayoutPreview from "../molecules/LayoutPreview";
+import { downloadLayout } from "../../utils/download";
 
 const LAYOUT_COMPONENTS: Record<string, string> = {
   "layout-b": "grid-2x2",
@@ -30,6 +31,10 @@ export default function Gallery({
     [selectedLayout],
   );
 
+  const handleSave = () => {
+    downloadLayout(photos, selectedLayout);
+  };
+
   return (
     <div className="mt-5 border-4 border-black bg-pink-300 p-6 shadow-[8px_8px_0px_0px_#000]">
       <div className="mb-4 flex items-center justify-between">
@@ -44,10 +49,19 @@ export default function Gallery({
           No photos captured yet. Strike a pose!
         </div>
       ) : (
-        <LayoutPreview
-          photos={photos}
-          layoutType={layoutType}
-        />
+        <div className="space-y-4">
+          <LayoutPreview
+            photos={photos}
+            layoutType={layoutType}
+            selectedLayout={selectedLayout}
+          />
+          <button
+            onClick={handleSave}
+            className="w-full border-4 border-black bg-yellow-300 py-3 text-lg font-black uppercase transition hover:translate-x-0.5 hover:translate-y-0.5 hover:shadow-[2px_2px_0px_0px_#000] active:translate-x-1 active:translate-y-1 active:shadow-none shadow-[4px_4px_0px_0px_#000] cursor-pointer"
+          >
+            💾 Save Photobooth
+          </button>
+        </div>
       )}
     </div>
   );

@@ -69,7 +69,7 @@ const LAYOUTS: LayoutTemplate[] = [
   },
   {
     id: "solace-layout",
-    name: "solace Layout",
+    name: "Solace Layout",
     badge: "NEW LAYOUT",
     size: "Size 6 x 2 Strip",
     poses: 4,
@@ -140,20 +140,67 @@ export default function LayoutSelector({
                   </span>
                 )}
 
-                <div className="flex flex-col gap-0.5 bg-gray-100 border border-gray-300">
-                  {layout.previewImages.map((img, index) => (
-                    <div
-                      key={index}
-                      className="aspect-[4/3] w-full overflow-hidden"
-                    >
-                      <img
-                        src={img}
-                        alt="Preview"
-                        className="h-full w-full object-cover"
-                      />
+                {/* Mini Layout Renderer */}
+                {layout.id === "layout-b" && (
+                  <div className="grid grid-cols-2 gap-0.5 bg-gray-100 p-0.5 border border-gray-300 aspect-[3/4] w-full">
+                    {layout.previewImages.map((img, index) => (
+                      <div key={index} className="aspect-[3/4] w-full overflow-hidden bg-gray-200">
+                        <img src={img} alt="Preview" className="h-full w-full object-cover" />
+                      </div>
+                    ))}
+                  </div>
+                )}
+                {layout.id === "hearts-filter" && (
+                  <div className="flex flex-col gap-0.5 bg-[#FFF0F2] p-0.5 border border-[#FF8DA1] aspect-[3/4] w-full">
+                    {layout.previewImages.map((img, index) => (
+                      <div key={index} className="aspect-[4/3] w-full overflow-hidden bg-[#FFF0F2]">
+                        <img src={img} alt="Preview" className="h-full w-full object-cover" />
+                      </div>
+                    ))}
+                  </div>
+                )}
+                {layout.id === "dog-filter" && (
+                  <div className="grid grid-cols-4 gap-0.5 bg-[#FFF9EB] p-0.5 border border-[#E6A04D] w-full aspect-[4/3] items-center justify-center">
+                    {layout.previewImages.map((img, index) => (
+                      <div key={index} className="aspect-[3/4] w-full overflow-hidden bg-[#FFF9EB]">
+                        <img src={img} alt="Preview" className="h-full w-full object-cover" />
+                      </div>
+                    ))}
+                  </div>
+                )}
+                {layout.id === "vintage-layout" && (
+                  <div className="relative h-[95px] w-full overflow-hidden bg-gray-50 border border-gray-300 flex items-center justify-center">
+                    {layout.previewImages.map((img, index) => (
+                      <div
+                        key={index}
+                        className="absolute border border-black bg-white p-0.5 shadow-[1px_1px_0px_0px_#000] w-9 transition-all duration-300"
+                        style={{
+                          transform: `rotate(${(index - 1.5) * 8}deg) translateY(${Math.abs(index - 1.5) * 4}px)`,
+                          zIndex: index,
+                          left: `calc(50% - 18px + ${(index - 1.5) * 7}px)`,
+                        }}
+                      >
+                        <div className="overflow-hidden aspect-[3/4] bg-gray-100">
+                          <img src={img} alt="Preview" className="h-full w-full object-cover" />
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                )}
+                {layout.id === "solace-layout" && (
+                  <div className="grid grid-cols-3 gap-0.5 bg-gray-100 p-0.5 border border-gray-300 aspect-[3/4] w-full">
+                    <div className="col-span-2 aspect-[3/4] overflow-hidden bg-gray-200">
+                      <img src={layout.previewImages[0]} alt="Preview" className="h-full w-full object-cover" />
                     </div>
-                  ))}
-                </div>
+                    <div className="col-span-1 flex flex-col gap-0.5 justify-between">
+                      {layout.previewImages.slice(1).map((img, index) => (
+                        <div key={index} className="aspect-[3/4] w-full overflow-hidden bg-gray-200 min-h-0">
+                          <img src={img} alt="Preview" className="h-full w-full object-cover" />
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                )}
                 <div className="mt-1 text-center text-[7px] tracking-widest text-gray-400 uppercase font-bold">
                   photobooth
                 </div>
