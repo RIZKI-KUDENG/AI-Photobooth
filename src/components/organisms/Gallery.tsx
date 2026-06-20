@@ -1,17 +1,6 @@
-import { useMemo } from "react";
 import ResetButton from "../atoms/ResetButton";
-import LayoutPreview from "../molecules/LayoutPreview";
+import { getLayout } from "../../layouts/registry";
 import { downloadLayout } from "../../utils/download";
-
-const LAYOUT_COMPONENTS: Record<string, string> = {
-  "layout-b": "grid-2x2",
-  "hearts-filter": "strip-vertical",
-  "dog-filter": "strip-horizontal",
-  "vintage-layout": "polaroid-stack",
-  "solace-layout": "hero-grid",
-};
-
-const DEFAULT_LAYOUT = "grid-2x2";
 
 interface GalleryProps {
   photos: string[];
@@ -26,10 +15,8 @@ export default function Gallery({
   maxPhotos,
   onReset,
 }: GalleryProps) {
-  const layoutType = useMemo(
-    () => LAYOUT_COMPONENTS[selectedLayout] ?? DEFAULT_LAYOUT,
-    [selectedLayout],
-  );
+  const layout = getLayout(selectedLayout);
+  const GalleryPreview = layout?.GalleryPreview;
 
   const handleSave = () => {
     downloadLayout(photos, selectedLayout);
@@ -50,11 +37,13 @@ export default function Gallery({
         </div>
       ) : (
         <div className="space-y-4">
-          <LayoutPreview
-            photos={photos}
-            layoutType={layoutType}
-            selectedLayout={selectedLayout}
-          />
+          {GalleryPreview ? (
+            <GalleryPreview photos={photos} />
+          ) : (
+            <div className="text-center text-red-500 font-black">
+              Unknown layout: {selectedLayout}
+            </div>
+          )}
           <button
             onClick={handleSave}
             className="w-full border-4 border-black bg-yellow-300 py-2.5 md:py-3 text-sm md:text-lg font-black uppercase transition hover:translate-x-0.5 hover:translate-y-0.5 hover:shadow-[2px_2px_0px_0px_#000] active:translate-x-1 active:translate-y-1 active:shadow-none shadow-[4px_4px_0px_0px_#000] cursor-pointer"
