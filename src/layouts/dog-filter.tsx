@@ -45,37 +45,37 @@ function downloadLayout(
   images: HTMLImageElement[],
   _canvas: HTMLCanvasElement,
 ) {
-  _canvas.width = 1200;
-  _canvas.height = 400;
+  _canvas.width = 3600;
+  _canvas.height = 1200;
 
   ctx.fillStyle = "#FFF9EB";
   ctx.fillRect(0, 0, _canvas.width, _canvas.height);
 
-  ctx.lineWidth = 12;
+  ctx.lineWidth = 36;
   ctx.strokeStyle = "#E6A04D";
-  ctx.strokeRect(6, 6, _canvas.width - 12, _canvas.height - 12);
+  ctx.strokeRect(18, 18, _canvas.width - 36, _canvas.height - 36);
 
-  const leftOffset = 30;
-  const topOffset = 30;
-  const gap = 20;
-  const itemW = 265;
-  const itemH = 280;
+  const leftOffset = 90;
+  const topOffset = 90;
+  const gap = 60;
+  const itemW = 795;
+  const itemH = 840;
 
   for (let i = 0; i < 4; i++) {
     const x = leftOffset + i * (itemW + gap);
     const y = topOffset;
 
-    ctx.lineWidth = 4;
+    ctx.lineWidth = 12;
     ctx.strokeStyle = "#E6A04D";
     ctx.strokeRect(x, y, itemW, itemH);
 
     if (images[i]) {
-      ctx.drawImage(images[i], x + 2, y + 2, itemW - 4, itemH - 4);
+      ctx.drawImage(images[i], x + 6, y + 6, itemW - 12, itemH - 12);
     } else {
       ctx.fillStyle = "#F9FAFB";
-      ctx.fillRect(x + 2, y + 2, itemW - 4, itemH - 4);
+      ctx.fillRect(x + 6, y + 6, itemW - 12, itemH - 12);
       ctx.fillStyle = "#E6A04D";
-      ctx.font = "bold 16px Arial";
+      ctx.font = "bold 48px Arial";
       ctx.textAlign = "center";
       ctx.textBaseline = "middle";
       ctx.fillText(`SLOT 0${i + 1}`, x + itemW / 2, y + itemH / 2);
@@ -83,12 +83,13 @@ function downloadLayout(
   }
 
   ctx.fillStyle = "#E6A04D";
-  ctx.font = "bold 20px Arial";
+  ctx.font = "bold 60px Arial";
   ctx.textAlign = "center";
+  ctx.textBaseline = "middle";
   ctx.fillText(
     "🐾 DOG FILTER LAYOUT 🐾",
     _canvas.width / 2,
-    _canvas.height - 40,
+    _canvas.height - 120,
   );
 }
 
@@ -107,6 +108,8 @@ const layout: LayoutDefinition = {
   MiniPreview,
   GalleryPreview,
   downloadLayout,
+  cardClass: "border-black bg-white hover:-translate-y-1 shadow-[4px_4px_0px_0px_#000]",
+  selectedCardClass: "border-[#E6A04D] bg-[#FFF9EB] scale-105 shadow-[4px_4px_0px_0px_#000]",
 };
 
 export default layout;

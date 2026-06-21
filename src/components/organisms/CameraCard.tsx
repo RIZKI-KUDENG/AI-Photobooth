@@ -41,7 +41,11 @@ export default function CameraCard({
             ref={webcamRef}
             audio={false}
             screenshotFormat="image/jpeg"
-            videoConstraints={{ width: { ideal: 1920 }, height: { ideal: 1080 }, facingMode: "user" }}
+            videoConstraints={{
+              width: 1920,
+              height: 1080,
+              facingMode: "user"
+            }}
             className={`w-full h-full object-cover ${getThemeFilter(selectedTheme)}`}
           />
         </div>

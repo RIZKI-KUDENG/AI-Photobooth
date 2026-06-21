@@ -34,21 +34,21 @@ const GalleryPreview: React.FC<{ photos: string[] }> = ({ photos }) => (
 );
 
 function downloadLayout(ctx: CanvasRenderingContext2D, images: HTMLImageElement[], _canvas: HTMLCanvasElement) {
-  _canvas.width = 800;
-  _canvas.height = 1100;
+  _canvas.width = 2000;
+  _canvas.height = 2750;
 
   ctx.fillStyle = "#FFFFFF";
   ctx.fillRect(0, 0, _canvas.width, _canvas.height);
 
-  ctx.lineWidth = 16;
+  ctx.lineWidth = 40;
   ctx.strokeStyle = "#000000";
-  ctx.strokeRect(8, 8, _canvas.width - 16, _canvas.height - 16);
+  ctx.strokeRect(20, 20, _canvas.width - 40, _canvas.height - 40);
 
-  const leftOffset = 40;
-  const topOffset = 40;
-  const gap = 20;
-  const itemW = (_canvas.width - leftOffset * 2 - gap) / 2;
-  const itemH = 430;
+  const leftOffset = 100;
+  const topOffset = 100;
+  const gap = 50;
+  const itemW = (_canvas.width - leftOffset * 2 - gap) / 2; // 875
+  const itemH = 1075;
 
   for (let i = 0; i < 4; i++) {
     const col = i % 2;
@@ -56,17 +56,17 @@ function downloadLayout(ctx: CanvasRenderingContext2D, images: HTMLImageElement[
     const x = leftOffset + col * (itemW + gap);
     const y = topOffset + row * (itemH + gap);
 
-    ctx.lineWidth = 4;
+    ctx.lineWidth = 10;
     ctx.strokeStyle = "#000000";
     ctx.strokeRect(x, y, itemW, itemH);
 
     if (images[i]) {
-      ctx.drawImage(images[i], x + 2, y + 2, itemW - 4, itemH - 4);
+      ctx.drawImage(images[i], x + 5, y + 5, itemW - 10, itemH - 10);
     } else {
       ctx.fillStyle = "#F3F4F6";
-      ctx.fillRect(x + 2, y + 2, itemW - 4, itemH - 4);
+      ctx.fillRect(x + 5, y + 5, itemW - 10, itemH - 10);
       ctx.fillStyle = "#9CA3AF";
-      ctx.font = "bold 20px Arial";
+      ctx.font = "bold 50px Arial";
       ctx.textAlign = "center";
       ctx.textBaseline = "middle";
       ctx.fillText(`SLOT 0${i + 1}`, x + itemW / 2, y + itemH / 2);
@@ -74,9 +74,10 @@ function downloadLayout(ctx: CanvasRenderingContext2D, images: HTMLImageElement[
   }
 
   ctx.fillStyle = "#2D2D2D";
-  ctx.font = "bold 28px Arial";
+  ctx.font = "bold 70px Arial";
   ctx.textAlign = "center";
-  ctx.fillText("★ PHOTOBOOTH LAYOUT B ★", _canvas.width / 2, _canvas.height - 70);
+  ctx.textBaseline = "middle";
+  ctx.fillText("★ PHOTOBOOTH LAYOUT B ★", _canvas.width / 2, _canvas.height - 175);
 }
 
 const layout: LayoutDefinition = {
@@ -94,6 +95,8 @@ const layout: LayoutDefinition = {
   MiniPreview,
   GalleryPreview,
   downloadLayout,
+  cardClass: "border-black bg-white hover:-translate-y-1 shadow-[4px_4px_0px_0px_#000]",
+  selectedCardClass: "border-[#FFC72C] bg-[#FFFBEB] scale-105 shadow-[4px_4px_0px_0px_#000]",
 };
 
 export default layout;

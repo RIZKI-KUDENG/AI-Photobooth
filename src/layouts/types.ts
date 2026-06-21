@@ -12,4 +12,6 @@ export interface LayoutDefinition {
     images: HTMLImageElement[],
     canvas: HTMLCanvasElement,
   ) => void;
+  cardClass?: string;
+  selectedCardClass?: string;
 }

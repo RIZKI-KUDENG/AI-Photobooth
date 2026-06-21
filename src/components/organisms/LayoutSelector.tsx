@@ -22,10 +22,10 @@ function LayoutCard({
       className="group flex flex-col items-center shrink-0 snap-center cursor-pointer"
     >
       <div
-        className={`relative w-[120px] md:w-[140px] bg-white p-2 transition-all duration-200 border-4 ${
+        className={`relative w-[120px] md:w-[140px] p-2 transition-all duration-200 border-4 ${
           isSelected
-            ? "border-[#FF8DA1] bg-[#FFF0F2] scale-105 shadow-[4px_4px_0px_0px_#000]"
-            : "border-black hover:-translate-y-1 shadow-[4px_4px_0px_0px_#000]"
+            ? layout.selectedCardClass || "border-[#FF8DA1] bg-[#FFF0F2] scale-105 shadow-[4px_4px_0px_0px_#000]"
+            : layout.cardClass || "border-black bg-white hover:-translate-y-1 shadow-[4px_4px_0px_0px_#000]"
         }`}
       >
         {layout.badge && (

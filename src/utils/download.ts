@@ -28,7 +28,7 @@ export async function downloadLayout(photos: string[], selectedLayout: string) {
   layout.downloadLayout(ctx, images, canvas);
 
   const link = document.createElement("a");
-  link.download = `photobooth-${selectedLayout}-${Date.now()}.png`;
-  link.href = canvas.toDataURL("image/png");
+  link.download = `photobooth-${selectedLayout}-${Date.now()}.jpg`;
+  link.href = canvas.toDataURL("image/jpeg", 0.95);
   link.click();
 }

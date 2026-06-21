@@ -63,8 +63,8 @@ function downloadLayout(
   images: HTMLImageElement[],
   _canvas: HTMLCanvasElement,
 ) {
-  _canvas.width = 900;
-  _canvas.height = 900;
+  _canvas.width = 2250;
+  _canvas.height = 2250;
 
   ctx.fillStyle = "#F4EFE6";
   ctx.fillRect(0, 0, _canvas.width, _canvas.height);
@@ -72,69 +72,71 @@ function downloadLayout(
   const centerX = _canvas.width / 2;
   const centerY = _canvas.height / 2;
 
-  const polW = 320;
-  const polH = 400;
+  const polW = 800;
+  const polH = 1000;
 
   const rotations = [-12, -4, 4, 12];
-  const offsetsX = [-120, -40, 40, 120];
-  const offsetsY = [20, -10, -10, 20];
+  const offsetsX = [-300, -100, 100, 300];
+  const offsetsY = [50, -25, -25, 50];
 
   for (let i = 0; i < 4; i++) {
     ctx.save();
     const tx = centerX + offsetsX[i];
-    const ty = centerY + offsetsY[i] - 30;
+    const ty = centerY + offsetsY[i] - 75;
     ctx.translate(tx, ty);
     ctx.rotate((rotations[i] * Math.PI) / 180);
 
     ctx.shadowColor = "rgba(0, 0, 0, 0.25)";
-    ctx.shadowBlur = 8;
-    ctx.shadowOffsetX = 4;
-    ctx.shadowOffsetY = 4;
+    ctx.shadowBlur = 20;
+    ctx.shadowOffsetX = 10;
+    ctx.shadowOffsetY = 10;
 
     ctx.fillStyle = "#FAF6EE";
     ctx.fillRect(-polW / 2, -polH / 2, polW, polH);
 
     ctx.shadowColor = "transparent";
-    ctx.lineWidth = 3;
+    ctx.lineWidth = 8;
     ctx.strokeStyle = "#000000";
     ctx.strokeRect(-polW / 2, -polH / 2, polW, polH);
 
-    const picW = polW - 32;
-    const picH = polH - 100;
+    const picW = polW - 80;
+    const picH = polH - 250;
     const px = -picW / 2;
-    const py = -polH / 2 + 16;
+    const py = -polH / 2 + 40;
 
-    ctx.lineWidth = 2;
+    ctx.lineWidth = 5;
     ctx.strokeStyle = "#000000";
     ctx.strokeRect(px, py, picW, picH);
 
     if (images[i]) {
-      ctx.drawImage(images[i], px + 1, py + 1, picW - 2, picH - 2);
+      ctx.drawImage(images[i], px + 2, py + 2, picW - 4, picH - 4);
     } else {
       ctx.fillStyle = "#F3F4F6";
-      ctx.fillRect(px + 1, py + 1, picW - 2, picH - 2);
+      ctx.fillRect(px + 2, py + 2, picW - 4, picH - 4);
       ctx.fillStyle = "#9CA3AF";
-      ctx.font = "bold 14px Arial";
+      ctx.font = "bold 35px Arial";
       ctx.textAlign = "center";
       ctx.textBaseline = "middle";
       ctx.fillText(`SLOT 0${i + 1}`, 0, py + picH / 2);
     }
 
     ctx.fillStyle = "#4B5563";
-    ctx.font = "bold 12px Arial";
+    ctx.font = "bold 30px Arial";
     ctx.textAlign = "center";
-    ctx.fillText(`📷 VINTAGE 0${i + 1}`, 0, polH / 2 - 35);
+    ctx.textBaseline = "middle";
+    ctx.fillText(`📷 VINTAGE 0${i + 1}`, 0, polH / 2 - 88);
 
     ctx.restore();
   }
 
   ctx.fillStyle = "#2D2D2D";
-  ctx.font = "bold 24px Arial";
+  ctx.font = "bold 60px Arial";
   ctx.textAlign = "center";
+  ctx.textBaseline = "middle";
   ctx.fillText(
     "★ VINTAGE RETRO STACK ★",
     _canvas.width / 2,
-    _canvas.height - 50,
+    _canvas.height - 125,
   );
 }
 
@@ -153,6 +155,8 @@ const layout: LayoutDefinition = {
   MiniPreview,
   GalleryPreview,
   downloadLayout,
+  cardClass: "border-black bg-[#FAF6EE] hover:-translate-y-1 shadow-[4px_4px_0px_0px_#000]",
+  selectedCardClass: "border-[#A08A60] bg-[#FAF6EE] scale-105 shadow-[4px_4px_0px_0px_#000]",
 };
 
 export default layout;
