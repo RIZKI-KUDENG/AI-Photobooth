@@ -4,6 +4,7 @@ import LiveIndicator from "../atoms/LiveIndicator";
 import LayoutBadge from "../atoms/LayoutBadge";
 import SnapButton from "../atoms/SnapButton";
 import CountdownOverlay from "../atoms/CountdownOverlay";
+import TimerSelector from "../molecules/TimerSelector";
 
 interface CameraCardProps {
   webcamRef: RefObject<Webcam | null>;
@@ -11,8 +12,10 @@ interface CameraCardProps {
   selectedLayout: string;
   countdown: number | null;
   isCapturing: boolean;
+  timerDuration: number;
   slotsFull: boolean;
   onSnap: () => void;
+  onSelectDuration: (duration: number) => void;
   getThemeFilter: (theme: string) => string;
 }
 
@@ -22,8 +25,10 @@ export default function CameraCard({
   selectedLayout,
   countdown,
   isCapturing,
+  timerDuration,
   slotsFull,
   onSnap,
+  onSelectDuration,
   getThemeFilter,
 }: CameraCardProps) {
   return (
@@ -50,6 +55,11 @@ export default function CameraCard({
           />
         </div>
       </div>
+
+      <TimerSelector
+        selectedDuration={timerDuration}
+        onSelect={onSelectDuration}
+      />
 
       <SnapButton
         onClick={onSnap}
