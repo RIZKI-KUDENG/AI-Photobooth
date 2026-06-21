@@ -2,9 +2,9 @@
 import type { LayoutDefinition } from "./types";
 
 const MiniPreview: React.FC<{ previewImages: string[] }> = ({ previewImages }) => (
-  <div className="flex flex-col gap-0.5 bg-[#FFF0F2] p-0.5 border border-[#FF8DA1] aspect-[3/4] w-full">
+  <div className="flex flex-col gap-0.5 bg-[#FFF0F2] p-0.5 border border-[#FF8DA1] w-full">
     {previewImages.map((img, i) => (
-      <div key={i} className="aspect-[4/3] w-full overflow-hidden bg-[#FFF0F2]">
+      <div key={i} className="aspect-[4/3] w-full overflow-hidden bg-gray-100">
         <img src={img} alt="" className="h-full w-full object-cover" />
       </div>
     ))}
