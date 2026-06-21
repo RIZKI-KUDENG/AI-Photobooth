@@ -13,6 +13,7 @@ export default function Home() {
   const [selectedTheme, setSelectedTheme] = useState<string>("ALL BLACK");
   const [selectedLayout, setSelectedLayout] = useState<string>("layout-b");
   const [countdown, setCountdown] = useState<number | null>(null);
+  const [timerDuration, setTimerDuration] = useState<number>(3);
   const [isCapturing, setIsCapturing] = useState<boolean>(false);
 
   const maxPhotos = getLayoutLimit(selectedLayout);
@@ -43,9 +44,13 @@ export default function Home() {
       alert("Slot foto sudah penuh! Reset atau ganti layout untuk mengambil foto baru.");
       return;
     }
+    if (timerDuration === 0) {
+      handleSnap();
+      return;
+    }
     setIsCapturing(true);
-    setCountdown(3);
-  }, [photos.length, maxPhotos]);
+    setCountdown(timerDuration);
+  }, [photos.length, maxPhotos, timerDuration, handleSnap]);
 
   const resetSession = useCallback(() => {
     setPhotos([]);
@@ -76,8 +81,10 @@ export default function Home() {
           selectedLayout={selectedLayout}
           countdown={countdown}
           isCapturing={isCapturing}
+          timerDuration={timerDuration}
           slotsFull={photos.length >= maxPhotos}
           onSnap={startCountdown}
+          onSelectDuration={setTimerDuration}
           getThemeFilter={getThemeFilter}
         />
       }

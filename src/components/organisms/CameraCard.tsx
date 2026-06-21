@@ -44,7 +44,7 @@ export default function CameraCard({
             videoConstraints={{
               width: 1920,
               height: 1080,
-              facingMode: "user"
+              facingMode: "user",
             }}
             className={`w-full h-full object-cover ${getThemeFilter(selectedTheme)}`}
           />

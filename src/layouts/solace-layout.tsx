@@ -1,14 +1,23 @@
 /* eslint-disable react-refresh/only-export-components */
 import type { LayoutDefinition } from "./types";
 
-const MiniPreview: React.FC<{ previewImages: string[] }> = ({ previewImages }) => (
+const MiniPreview: React.FC<{ previewImages: string[] }> = ({
+  previewImages,
+}) => (
   <div className="grid grid-cols-3 gap-0.5 bg-[#720917] p-0.5 border border-white aspect-[3/4] w-full">
     <div className="col-span-2 aspect-[3/4] overflow-hidden bg-gray-200">
-      <img src={previewImages[0]} alt="" className="h-full w-full object-cover" />
+      <img
+        src={previewImages[0]}
+        alt=""
+        className="h-full w-full object-cover"
+      />
     </div>
     <div className="col-span-1 flex flex-col gap-0.5 justify-between">
       {previewImages.slice(1).map((img, i) => (
-        <div key={i} className="aspect-[3/4] w-full overflow-hidden bg-gray-200 min-h-0">
+        <div
+          key={i}
+          className="aspect-[3/4] w-full overflow-hidden bg-gray-200 min-h-0"
+        >
           <img src={img} alt="" className="h-full w-full object-cover" />
         </div>
       ))}
@@ -24,7 +33,11 @@ const GalleryPreview: React.FC<{ photos: string[] }> = ({ photos }) => (
     <div className="grid grid-cols-3 gap-1.5 sm:gap-2.5 bg-[#5A0612] p-1.5 sm:p-2 border-2 border-white">
       <div className="col-span-2 border-2 border-white aspect-[3/4] overflow-hidden bg-gray-100 relative">
         {photos[0] ? (
-          <img src={photos[0]} alt="Hero photo" className="w-full h-full object-cover" />
+          <img
+            src={photos[0]}
+            alt="Hero photo"
+            className="w-full h-full object-cover"
+          />
         ) : (
           <div className="w-full h-full flex flex-col items-center justify-center text-xs font-black text-gray-400 bg-[#720917]/20 border-2 border-dashed border-white/30">
             <span>HERO</span>
@@ -36,9 +49,16 @@ const GalleryPreview: React.FC<{ photos: string[] }> = ({ photos }) => (
         {Array.from({ length: 3 }).map((_, idx) => {
           const i = idx + 1;
           return (
-            <div key={i} className="flex-1 border-2 border-white aspect-[3/4] overflow-hidden bg-gray-100 relative min-h-0">
+            <div
+              key={i}
+              className="flex-1 border-2 border-white aspect-[3/4] overflow-hidden bg-gray-100 relative min-h-0"
+            >
               {photos[i] ? (
-                <img src={photos[i]} alt={`Photo ${i + 1}`} className="w-full h-full object-cover" />
+                <img
+                  src={photos[i]}
+                  alt={`Photo ${i + 1}`}
+                  className="w-full h-full object-cover"
+                />
               ) : (
                 <div className="w-full h-full flex flex-col items-center justify-center text-[8px] font-black text-gray-400 bg-[#720917]/20 border border-dashed border-white/30">
                   <span>SLOT</span>
@@ -56,7 +76,11 @@ const GalleryPreview: React.FC<{ photos: string[] }> = ({ photos }) => (
   </div>
 );
 
-function downloadLayout(ctx: CanvasRenderingContext2D, images: HTMLImageElement[], _canvas: HTMLCanvasElement) {
+function downloadLayout(
+  ctx: CanvasRenderingContext2D,
+  images: HTMLImageElement[],
+  _canvas: HTMLCanvasElement,
+) {
   _canvas.width = 2000;
   _canvas.height = 1625;
 
@@ -148,8 +172,10 @@ const layout: LayoutDefinition = {
   MiniPreview,
   GalleryPreview,
   downloadLayout,
-  cardClass: "border-black bg-[#720917] hover:-translate-y-1 shadow-[4px_4px_0px_0px_#000]",
-  selectedCardClass: "border-white bg-[#720917] scale-105 shadow-[4px_4px_0px_0px_#fff]",
+  cardClass:
+    "border-black bg-[#720917] hover:-translate-y-1 shadow-[4px_4px_0px_0px_#000]",
+  selectedCardClass:
+    "border-white bg-[#720917] scale-105 shadow-[4px_4px_0px_0px_#fff]",
 };
 
 export default layout;
