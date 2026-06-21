@@ -4,6 +4,7 @@ import heartsFilter from "./hearts-filter";
 import dogFilter from "./dog-filter";
 import vintageLayout from "./vintage-layout";
 import solaceLayout from "./solace-layout";
+import astronautLayout from "./astronout-layout";
 
 export const layouts: LayoutDefinition[] = [
   layoutB,
@@ -11,6 +12,7 @@ export const layouts: LayoutDefinition[] = [
   dogFilter,
   vintageLayout,
   solaceLayout,
+  astronautLayout,
 ];
 
 const layoutMap = new Map<string, LayoutDefinition>();

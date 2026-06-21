@@ -1,10 +1,12 @@
 /* eslint-disable react-refresh/only-export-components */
 import type { LayoutDefinition } from "./types";
 
-const MiniPreview: React.FC = () => (
+const MiniPreview: React.FC<{ previewImages: string[] }> = ({ previewImages }) => (
   <div className="grid grid-cols-2 gap-0.5 bg-gray-100 p-0.5 border border-gray-300 aspect-[3/4] w-full">
-    {Array.from({ length: 4 }).map((_, i) => (
-      <div key={i} className="aspect-[3/4] w-full overflow-hidden bg-gray-200" />
+    {previewImages.map((img, i) => (
+      <div key={i} className="aspect-[3/4] w-full overflow-hidden bg-gray-200">
+        <img src={img} alt="" className="h-full w-full object-cover" />
+      </div>
     ))}
   </div>
 );

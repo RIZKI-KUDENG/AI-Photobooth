@@ -1,10 +1,12 @@
 /* eslint-disable react-refresh/only-export-components */
 import type { LayoutDefinition } from "./types";
 
-const MiniPreview: React.FC = () => (
+const MiniPreview: React.FC<{ previewImages: string[] }> = ({ previewImages }) => (
   <div className="grid grid-cols-4 gap-0.5 bg-[#FFF9EB] p-0.5 border border-[#E6A04D] w-full aspect-[4/3] items-center justify-center">
-    {Array.from({ length: 4 }).map((_, i) => (
-      <div key={i} className="aspect-[3/4] w-full overflow-hidden bg-[#FFF9EB]" />
+    {previewImages.map((img, i) => (
+      <div key={i} className="aspect-[3/4] w-full overflow-hidden bg-[#FFF9EB]">
+        <img src={img} alt="" className="h-full w-full object-cover" />
+      </div>
     ))}
   </div>
 );
@@ -13,9 +15,16 @@ const GalleryPreview: React.FC<{ photos: string[] }> = ({ photos }) => (
   <div className="mx-auto w-full max-w-lg sm:max-w-xl border-4 border-[#E6A04D] bg-[#FFF9EB] p-3 sm:p-4 shadow-[8px_8px_0px_0px_#000]">
     <div className="grid grid-cols-4 gap-1.5 sm:gap-2.5 bg-gray-50 p-1.5 sm:p-2 border-2 border-[#E6A04D]">
       {Array.from({ length: 4 }).map((_, i) => (
-        <div key={i} className="aspect-[3/4] overflow-hidden border-2 border-[#E6A04D] bg-gray-100 relative">
+        <div
+          key={i}
+          className="aspect-3/4 overflow-hidden border-2 border-[#E6A04D] bg-gray-100 relative"
+        >
           {photos[i] ? (
-            <img src={photos[i]} alt={`Photo ${i + 1}`} className="w-full h-full object-cover" />
+            <img
+              src={photos[i]}
+              alt={`Photo ${i + 1}`}
+              className="w-full h-full object-cover"
+            />
           ) : (
             <div className="w-full h-full flex flex-col items-center justify-center text-[10px] font-black text-gray-400 bg-gray-50 border-2 border-dashed border-gray-200">
               <span>SLOT</span>
@@ -31,7 +40,11 @@ const GalleryPreview: React.FC<{ photos: string[] }> = ({ photos }) => (
   </div>
 );
 
-function downloadLayout(ctx: CanvasRenderingContext2D, images: HTMLImageElement[], _canvas: HTMLCanvasElement) {
+function downloadLayout(
+  ctx: CanvasRenderingContext2D,
+  images: HTMLImageElement[],
+  _canvas: HTMLCanvasElement,
+) {
   _canvas.width = 1200;
   _canvas.height = 400;
 
@@ -72,7 +85,11 @@ function downloadLayout(ctx: CanvasRenderingContext2D, images: HTMLImageElement[
   ctx.fillStyle = "#E6A04D";
   ctx.font = "bold 20px Arial";
   ctx.textAlign = "center";
-  ctx.fillText("🐾 DOG FILTER LAYOUT 🐾", _canvas.width / 2, _canvas.height - 40);
+  ctx.fillText(
+    "🐾 DOG FILTER LAYOUT 🐾",
+    _canvas.width / 2,
+    _canvas.height - 40,
+  );
 }
 
 const layout: LayoutDefinition = {

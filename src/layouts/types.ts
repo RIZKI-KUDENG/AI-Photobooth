@@ -5,7 +5,7 @@ export interface LayoutDefinition {
   size: string;
   poses: number;
   previewImages: string[];
-  MiniPreview: React.FC;
+  MiniPreview: React.FC<{ previewImages: string[] }>;
   GalleryPreview: React.FC<{ photos: string[] }>;
   downloadLayout?: (
     ctx: CanvasRenderingContext2D,

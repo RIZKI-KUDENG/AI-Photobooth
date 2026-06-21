@@ -1,9 +1,9 @@
 /* eslint-disable react-refresh/only-export-components */
 import type { LayoutDefinition } from "./types";
 
-const MiniPreview: React.FC = () => (
+const MiniPreview: React.FC<{ previewImages: string[] }> = ({ previewImages }) => (
   <div className="relative h-[95px] w-full overflow-hidden bg-gray-50 border border-gray-300 flex items-center justify-center">
-    {Array.from({ length: 4 }).map((_, i) => (
+    {previewImages.map((img, i) => (
       <div
         key={i}
         className="absolute border border-black bg-white p-0.5 shadow-[1px_1px_0px_0px_#000] w-9"
@@ -13,14 +13,19 @@ const MiniPreview: React.FC = () => (
           left: `calc(50% - 18px + ${(i - 1.5) * 7}px)`,
         }}
       >
-        <div className="overflow-hidden aspect-[3/4] bg-gray-100" />
+        <div className="overflow-hidden aspect-[3/4] bg-gray-100">
+          <img src={img} alt="" className="h-full w-full object-cover" />
+        </div>
       </div>
     ))}
   </div>
 );
 
 const GalleryPreview: React.FC<{ photos: string[] }> = ({ photos }) => (
-  <div className="relative flex justify-center py-4 sm:py-6" style={{ minHeight: 250 }}>
+  <div
+    className="relative flex justify-center py-4 sm:py-6"
+    style={{ minHeight: 250 }}
+  >
     {Array.from({ length: 4 }).map((_, i) => (
       <div
         key={i}
@@ -33,7 +38,11 @@ const GalleryPreview: React.FC<{ photos: string[] }> = ({ photos }) => (
       >
         <div className="overflow-hidden border-2 border-black aspect-[3/4] bg-gray-100 relative">
           {photos[i] ? (
-            <img src={photos[i]} alt={`Photo ${i + 1}`} className="w-full h-full object-cover" />
+            <img
+              src={photos[i]}
+              alt={`Photo ${i + 1}`}
+              className="w-full h-full object-cover"
+            />
           ) : (
             <div className="w-full h-full flex flex-col items-center justify-center text-[10px] sm:text-xs font-black text-gray-400 bg-gray-50 border-2 border-dashed border-gray-200">
               <span>SLOT</span>
@@ -49,7 +58,11 @@ const GalleryPreview: React.FC<{ photos: string[] }> = ({ photos }) => (
   </div>
 );
 
-function downloadLayout(ctx: CanvasRenderingContext2D, images: HTMLImageElement[], _canvas: HTMLCanvasElement) {
+function downloadLayout(
+  ctx: CanvasRenderingContext2D,
+  images: HTMLImageElement[],
+  _canvas: HTMLCanvasElement,
+) {
   _canvas.width = 900;
   _canvas.height = 900;
 
@@ -118,7 +131,11 @@ function downloadLayout(ctx: CanvasRenderingContext2D, images: HTMLImageElement[
   ctx.fillStyle = "#2D2D2D";
   ctx.font = "bold 24px Arial";
   ctx.textAlign = "center";
-  ctx.fillText("★ VINTAGE RETRO STACK ★", _canvas.width / 2, _canvas.height - 50);
+  ctx.fillText(
+    "★ VINTAGE RETRO STACK ★",
+    _canvas.width / 2,
+    _canvas.height - 50,
+  );
 }
 
 const layout: LayoutDefinition = {

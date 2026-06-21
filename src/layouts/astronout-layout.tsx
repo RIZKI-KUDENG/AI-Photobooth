@@ -1,10 +1,12 @@
 /* eslint-disable react-refresh/only-export-components */
 import type { LayoutDefinition } from "./types";
 
-const MiniPreview: React.FC<{ previewImages: string[] }> = ({ previewImages }) => (
-  <div className="flex flex-col gap-0.5 bg-[#FFF0F2] p-0.5 border border-[#FF8DA1] aspect-[3/4] w-full">
+const MiniPreview: React.FC<{ previewImages: string[] }> = ({
+  previewImages,
+}) => (
+  <div className="flex flex-col gap-0.5 bg-[#FFF0F2] p-0.5 border border-[#FF8DA1] aspect-3/4 w-full">
     {previewImages.map((img, i) => (
-      <div key={i} className="aspect-[4/3] w-full overflow-hidden bg-[#FFF0F2]">
+      <div key={i} className="aspect-4/3 w-full overflow-hidden bg-[#FFF0F2]">
         <img src={img} alt="" className="h-full w-full object-cover" />
       </div>
     ))}
@@ -15,9 +17,16 @@ const GalleryPreview: React.FC<{ photos: string[] }> = ({ photos }) => (
   <div className="mx-auto w-full max-w-[180px] border-4 border-[#FF8DA1] bg-[#FFF0F2] p-3 sm:p-4 shadow-[8px_8px_0px_0px_#000]">
     <div className="flex flex-col gap-2 sm:gap-3 bg-gray-50 p-1.5 border-2 border-[#FF8DA1]">
       {Array.from({ length: 4 }).map((_, i) => (
-        <div key={i} className="aspect-[3/4] overflow-hidden border-2 border-[#FF8DA1] bg-gray-100 relative">
+        <div
+          key={i}
+          className="aspect-[3/4] overflow-hidden border-2 border-[#FF8DA1] bg-gray-100 relative"
+        >
           {photos[i] ? (
-            <img src={photos[i]} alt={`Photo ${i + 1}`} className="w-full h-full object-cover" />
+            <img
+              src={photos[i]}
+              alt={`Photo ${i + 1}`}
+              className="w-full h-full object-cover"
+            />
           ) : (
             <div className="w-full h-full flex flex-col items-center justify-center text-[10px] font-black text-gray-400 bg-gray-50 border-2 border-dashed border-gray-200">
               <span>SLOT</span>
@@ -28,12 +37,16 @@ const GalleryPreview: React.FC<{ photos: string[] }> = ({ photos }) => (
       ))}
     </div>
     <div className="mt-3 sm:mt-4 text-center text-[9px] sm:text-[10px] font-black uppercase tracking-widest text-[#FF6B91]">
-      ♥ HEARTS FILTER ♥
+      🚀ASTRONAUT LAYOUT🚀
     </div>
   </div>
 );
 
-function downloadLayout(ctx: CanvasRenderingContext2D, images: HTMLImageElement[], _canvas: HTMLCanvasElement) {
+function downloadLayout(
+  ctx: CanvasRenderingContext2D,
+  images: HTMLImageElement[],
+  _canvas: HTMLCanvasElement,
+) {
   _canvas.width = 400;
   _canvas.height = 1200;
 
@@ -74,12 +87,12 @@ function downloadLayout(ctx: CanvasRenderingContext2D, images: HTMLImageElement[
   ctx.fillStyle = "#FF6B91";
   ctx.font = "bold 20px Arial";
   ctx.textAlign = "center";
-  ctx.fillText("♥ HEARTS FILTER ♥", _canvas.width / 2, _canvas.height - 70);
+  ctx.fillText("🚀ASTRONAUT LAYOUT🚀", _canvas.width / 2, _canvas.height - 70);
 }
 
 const layout: LayoutDefinition = {
-  id: "hearts-filter",
-  name: "Hearts Filter Layout",
+  id: "astronout-layout",
+  name: "Astronaut Layout",
   badge: "NEW LAYOUT",
   size: "Size 6 x 2 Strip",
   poses: 4,

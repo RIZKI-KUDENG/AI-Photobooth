@@ -7,12 +7,22 @@ interface LayoutSelectorProps {
   onSelectLayout: (id: string) => void;
 }
 
-function LayoutCardInner({ layout, isSelected, compact }: { layout: LayoutDefinition; isSelected: boolean; compact?: boolean }) {
-  const w = compact ? "w-[120px]" : "w-[140px]";
+function LayoutCard({
+  layout,
+  isSelected,
+  onSelect,
+}: {
+  layout: LayoutDefinition;
+  isSelected: boolean;
+  onSelect: (id: string) => void;
+}) {
   return (
-    <>
+    <div
+      onClick={() => onSelect(layout.id)}
+      className="group flex flex-col items-center shrink-0 snap-center cursor-pointer"
+    >
       <div
-        className={`relative ${w} bg-white p-2 transition-all duration-200 border-4 ${
+        className={`relative w-[120px] md:w-[140px] bg-white p-2 transition-all duration-200 border-4 ${
           isSelected
             ? "border-[#FF8DA1] bg-[#FFF0F2] scale-105 shadow-[4px_4px_0px_0px_#000]"
             : "border-black hover:-translate-y-1 shadow-[4px_4px_0px_0px_#000]"
@@ -24,7 +34,7 @@ function LayoutCardInner({ layout, isSelected, compact }: { layout: LayoutDefini
           </span>
         )}
 
-        <layout.MiniPreview />
+        <layout.MiniPreview previewImages={layout.previewImages} />
 
         <div className="mt-1 text-center text-[7px] tracking-widest text-gray-400 uppercase font-bold">
           photobooth
@@ -32,24 +42,11 @@ function LayoutCardInner({ layout, isSelected, compact }: { layout: LayoutDefini
       </div>
 
       <div className="mt-3 text-center">
-        <h3 className={`text-xs font-black uppercase text-[#2D2D2D] truncate ${w}`}>
+        <h3 className="text-xs font-black uppercase text-[#2D2D2D] truncate w-[120px] md:w-[140px]">
           {layout.name}
         </h3>
-        <p className="text-[10px] text-gray-500 font-bold">
-          {layout.size}
-        </p>
+        <p className="text-[10px] text-gray-500 font-bold">{layout.size}</p>
       </div>
-    </>
-  );
-}
-
-function LayoutCard({ layout, isSelected, onSelect }: { layout: LayoutDefinition; isSelected: boolean; onSelect: (id: string) => void }) {
-  return (
-    <div
-      onClick={() => onSelect(layout.id)}
-      className="flex flex-col items-center cursor-pointer"
-    >
-      <LayoutCardInner layout={layout} isSelected={isSelected} compact />
     </div>
   );
 }
@@ -81,46 +78,31 @@ export default function LayoutSelector({
         </p>
       </div>
 
-      <div className="flex flex-wrap justify-center gap-4 md:hidden">
-        {layouts.map((layout) => (
-          <LayoutCard
-            key={layout.id}
-            layout={layout}
-            isSelected={selectedLayout === layout.id}
-            onSelect={onSelectLayout}
-          />
-        ))}
-      </div>
-
-      <div className="hidden md:block relative px-10">
+      <div className="relative overflow-hidden">
         <button
           onClick={() => handleScroll("left")}
-          className="absolute left-0 top-1/2 z-10 flex h-10 w-10 -translate-y-1/2 items-center justify-center rounded-full border-4 border-black bg-white font-black shadow-[2px_2px_0px_0px_#000] transition active:translate-x-0.5 active:translate-y-0.5 active:shadow-none"
+          className="absolute left-0 top-1/2 z-10 flex h-8 w-8 md:h-10 md:w-10 -translate-y-1/2 items-center justify-center rounded-full border-4 border-black bg-white font-black text-sm md:text-base shadow-[2px_2px_0px_0px_#000] transition active:translate-x-0.5 active:translate-y-0.5 active:shadow-none"
         >
           &larr;
         </button>
 
         <div
           ref={scrollContainerRef}
-          className="scrollbar-none flex gap-6 overflow-x-auto pb-4 pt-4 snap-x snap-mandatory"
+          className="scrollbar-none flex gap-4 md:gap-6 overflow-x-auto px-8 md:px-10 py-3 md:py-4 snap-x snap-mandatory"
         >
           {layouts.map((layout) => (
-            <div
+            <LayoutCard
               key={layout.id}
-              onClick={() => onSelectLayout(layout.id)}
-              className="group flex flex-col items-center shrink-0 snap-center cursor-pointer"
-            >
-              <LayoutCardInner
-                layout={layout}
-                isSelected={selectedLayout === layout.id}
-              />
-            </div>
+              layout={layout}
+              isSelected={selectedLayout === layout.id}
+              onSelect={onSelectLayout}
+            />
           ))}
         </div>
 
         <button
           onClick={() => handleScroll("right")}
-          className="absolute right-0 top-1/2 z-10 flex h-10 w-10 -translate-y-1/2 items-center justify-center rounded-full border-4 border-black bg-white font-black shadow-[2px_2px_0px_0px_#000] transition active:translate-x-0.5 active:translate-y-0.5 active:shadow-none"
+          className="absolute right-0 top-1/2 z-10 flex h-8 w-8 md:h-10 md:w-10 -translate-y-1/2 items-center justify-center rounded-full border-4 border-black bg-white font-black text-sm md:text-base shadow-[2px_2px_0px_0px_#000] transition active:translate-x-0.5 active:translate-y-0.5 active:shadow-none"
         >
           &rarr;
         </button>
