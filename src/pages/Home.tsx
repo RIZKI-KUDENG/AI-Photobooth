@@ -59,22 +59,14 @@ export default function Home() {
   return (
     <PhotoboothLayout
       leftContent={
-        <>
-          <FilterCard
-            selectedTheme={selectedTheme}
-            selectedLayout={selectedLayout}
-            onSelectTheme={setSelectedTheme}
-            onSelectLayout={setSelectedLayout}
-          />
-          <Gallery
-            photos={photos}
-            selectedLayout={selectedLayout}
-            maxPhotos={maxPhotos}
-            onReset={resetSession}
-          />
-        </>
+        <FilterCard
+          selectedTheme={selectedTheme}
+          selectedLayout={selectedLayout}
+          onSelectTheme={setSelectedTheme}
+          onSelectLayout={setSelectedLayout}
+        />
       }
-      rightContent={
+      centerContent={
         <CameraCard
           webcamRef={webcamRef}
           selectedTheme={selectedTheme}
@@ -86,6 +78,14 @@ export default function Home() {
           onSnap={startCountdown}
           onSelectDuration={setTimerDuration}
           getThemeFilter={getThemeFilter}
+        />
+      }
+      rightContent={
+        <Gallery
+          photos={photos}
+          selectedLayout={selectedLayout}
+          maxPhotos={maxPhotos}
+          onReset={resetSession}
         />
       }
     />

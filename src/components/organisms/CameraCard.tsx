@@ -32,13 +32,13 @@ export default function CameraCard({
   getThemeFilter,
 }: CameraCardProps) {
   return (
-    <div className="border-4 border-black bg-white p-4 md:p-5 shadow-[10px_10px_0px_0px_#000] h-fit md:sticky md:top-8">
+    <div className="border-4 border-black bg-white p-5 md:p-6 shadow-[12px_12px_0px_0px_#000]">
       <div className="mb-4 flex items-center justify-between">
         <LiveIndicator />
         <LayoutBadge selectedLayout={selectedLayout} />
       </div>
 
-      <div className="relative overflow-hidden border-4 border-black bg-black aspect-3/4">
+      <div className="relative overflow-hidden border-4 border-black bg-black aspect-4/3">
         {countdown !== null && <CountdownOverlay countdown={countdown} />}
 
         <div className="w-full h-full [&_video]:scale-x-[-1]">
@@ -56,17 +56,21 @@ export default function CameraCard({
         </div>
       </div>
 
-      <TimerSelector
-        selectedDuration={timerDuration}
-        onSelect={onSelectDuration}
-      />
+      <div className="mt-5">
+        <TimerSelector
+          selectedDuration={timerDuration}
+          onSelect={onSelectDuration}
+        />
+      </div>
 
-      <SnapButton
-        onClick={onSnap}
-        disabled={isCapturing || slotsFull}
-        isCapturing={isCapturing}
-        slotsFull={slotsFull}
-      />
+      <div className="mt-4">
+        <SnapButton
+          onClick={onSnap}
+          disabled={isCapturing || slotsFull}
+          isCapturing={isCapturing}
+          slotsFull={slotsFull}
+        />
+      </div>
     </div>
   );
 }
